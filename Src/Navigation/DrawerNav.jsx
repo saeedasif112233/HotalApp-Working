@@ -21,7 +21,7 @@ export default function DrawerNav() {
     <Drawer.Navigator>
       <Drawer.Screen
         name="Homescreen"
-        component={Home}
+        component={HomeTab}
         options={{
           title: "Client",
           headerShown: false,

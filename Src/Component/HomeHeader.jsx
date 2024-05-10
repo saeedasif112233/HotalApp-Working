@@ -4,7 +4,7 @@ import { color, header } from "../Global/Styles";
 import Icon from "react-native-vector-icons/FontAwesome";
 import Feather from "react-native-vector-icons/Feather";
 import Entypo from "react-native-vector-icons/Entypo";
-// import { Avatar, Badge, withBadge } from "react-native-elements";
+import { Avatar, Badge, withBadge } from "react-native-elements";
 
 export default function HomeHeader({ Title, navigation }) {
   const [badgevalue, setbadgevalue] = useState("99");
@@ -29,7 +29,7 @@ export default function HomeHeader({ Title, navigation }) {
         </View>
         <View style={{ position: "relative", marginRight: 20 }}>
           <View style={styles.Badge}>
-            {/* <Badge value={badgevalue} status="error" /> */}
+            <Badge value={badgevalue} status="error" />
           </View>
           <View>
             <Feather
