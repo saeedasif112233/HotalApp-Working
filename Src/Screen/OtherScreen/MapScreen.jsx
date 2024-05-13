@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from "react-native";
 export default function MapScreen() {
   return (
     <View style={styles.container}>
-      <Text>Map Screen</Text>
+      <Text>Map Screen saeedf asif</Text>
     </View>
   );
 }
