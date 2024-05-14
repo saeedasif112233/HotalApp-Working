@@ -114,6 +114,7 @@ export default function Home({ navigation }) {
                   style={{
                     top: 0,
                     color: indexCheck === item.id ? color.lYellow : "black",
+                    fontWeight: "bold",
                   }}
                 >
                   {item.name}
@@ -149,6 +150,7 @@ export default function Home({ navigation }) {
                   style={{
                     top: 0,
                     color: indexCheck2 === item.id ? color.lYellow : "black",
+                    fontWeight: "bold",
                   }}
                 >
                   {item.name}
@@ -184,6 +186,7 @@ export default function Home({ navigation }) {
                   style={{
                     top: 0,
                     color: indexCheck3 === item.id ? color.lYellow : "black",
+                    fontWeight: "bold",
                   }}
                 >
                   {item.name}
@@ -245,7 +248,7 @@ const styles = StyleSheet.create({
   },
   FloatingButton: {
     position: "absolute",
-    bottom: 10,
+    bottom: -50,
     right: 13,
     width: 60,
     height: 60,
