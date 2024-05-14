@@ -18,7 +18,7 @@ import { color } from "../Global/Styles";
 const Drawer = createDrawerNavigator();
 export default function DrawerNav() {
   return (
-    <Drawer.Navigator>
+    <Drawer.Navigator initialRouteName="Homescreen">
       <Drawer.Screen
         name="Homescreen"
         component={HomeTab}

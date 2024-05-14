@@ -106,61 +106,11 @@ export default function Home({ navigation }) {
               marginRight: 45,
               justifyContent: "space-around",
             }}
-          >
-            <TouchableOpacity
-              style={{
-                backgroundColor: loc ? "white" : "lightgrey",
-                width: 175,
-                flexDirection: "row",
-                marginLeft: 10,
-                alignItems: "center",
-                height: 45,
-                borderRadius: 50,
-                padding: 3,
-              }}
-              onPress={() => {
-                setloc(true);
-              }}
-            >
-              <Icon name="location-sharp" size={30} />
-              <Text>LDA Avenue 1</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={{
-                backgroundColor: loc ? "lightgrey" : "white",
-                borderRadius: 30,
-                width: 100,
-                flexDirection: "row",
-                alignItems: "center",
-                padding: 5,
-                marginRight: 10,
-                // marginLeft: 5,
-              }}
-              onPress={() => {
-                setloc(false);
-              }}
-            >
-              <Icon1 name="clock-time-four" size={30} />
-              <Text style={{ marginLeft: 4 }}>Now</Text>
-            </TouchableOpacity>
-          </View>
-          <View>
-            <Icon1
-              name="tune"
-              size={30}
-              marginTop={23}
-              marginLeft={-30}
-              onPress={() => {
-                Alert.alert("Hello Tune");
-              }}
-            />
-          </View>
+          ></View>
         </View>
 
-        <View
-          style={{ backgroundColor: "lightgrey", padding: 4, marginTop: 20 }}
-        >
-          <Text style={{ fontSize: 18, fontWeight: "bold" }}>Catagories</Text>
+        <View style={styles.Titlebar}>
+          <Text style={styles.Texttitle}>Breakfast</Text>
         </View>
 
         <FlatList
@@ -190,6 +140,7 @@ export default function Home({ navigation }) {
                   style={{
                     top: 0,
                     color: indexCheck === item.id ? color.lYellow : "black",
+                    fontWeight: "bold",
                   }}
                 >
                   {item.name}
@@ -200,9 +151,7 @@ export default function Home({ navigation }) {
         />
 
         <View style={styles.Titlebar}>
-          <Text style={{ fontSize: 18, fontWeight: "bold" }}>
-            Free Delivery Now
-          </Text>
+          <Text style={styles.Texttitle}>Lunch</Text>
         </View>
         <View>
           <View style={{ flexDirection: "row" }}>
@@ -345,10 +294,10 @@ const styles = StyleSheet.create({
     marginBottom: 25,
   },
   Titlebar: {
-    backgroundColor: "lightgrey",
+    backgroundColor: color.lYellow,
+    borderRadius: 10,
     padding: 4,
-    marginTop: -10,
-    marginBottom: 2,
+    marginTop: 0,
   },
   FloatingButton: {
     position: "absolute",
@@ -363,5 +312,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: color.lYellow,
     // textAlign: "center",
+  },
+  Texttitle: {
+    textAlign: "center",
+    fontSize: 20,
+    fontWeight: "bold",
+    marginLeft: 10,
   },
 });
