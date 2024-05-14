@@ -1,25 +1,20 @@
 import React, { useState } from "react";
-
 import {
   View,
   Text,
   StyleSheet,
   TouchableOpacity,
-  Alert,
   FlatList,
   Pressable,
   Image,
   Dimensions,
+  ScrollView,
 } from "react-native";
 import Statusbar from "../../Component/statusbar";
 import HomeHeader from "../../Component/HomeHeader";
-import { color, header } from "../../Global/Styles";
-import { ScrollView } from "react-native";
+import { color } from "../../Global/Styles";
 import Icon from "react-native-vector-icons/Ionicons";
-import Icon1 from "react-native-vector-icons/MaterialCommunityIcons";
-import { data, foodCardData } from "../../Global/Data";
-import FoodCard from "../../Component/FoodCard";
-import HomeTab from "../../Navigation/HomeTab";
+import { data } from "../../Global/Data";
 
 const Screen_width = Dimensions.get("window").width;
 const { height, width } = Dimensions.get("window");
@@ -27,8 +22,9 @@ const { height, width } = Dimensions.get("window");
 export default function Home({ navigation }) {
   const [isFocused, setIsFocused] = useState(false);
   const [Delivery, setDelivery] = useState(true);
-  const [loc, setloc] = useState(false);
   const [indexCheck, setindexCheck] = useState("0");
+  const [indexCheck2, setindexCheck2] = useState("0");
+  const [indexCheck3, setindexCheck3] = useState("0");
 
   return (
     <View>
@@ -36,9 +32,7 @@ export default function Home({ navigation }) {
         <View style={styles.container}>
           <Statusbar color={color.dgreen} />
           <View>
-            <View>
-              <HomeHeader Title={"Food App"} navigation={navigation} />
-            </View>
+            <HomeHeader Title={"Food App"} navigation={navigation} />
 
             <View
               style={{
@@ -48,7 +42,6 @@ export default function Home({ navigation }) {
                 marginBottom: 1,
               }}
             >
-              {/* <FoodCard /> */}
               <TouchableOpacity
                 style={[
                   styles.btn,
@@ -80,7 +73,6 @@ export default function Home({ navigation }) {
                 onPress={() => {
                   setIsFocused(false);
                   setDelivery(false);
-                  // navigation.navigate("MapScreen");
                 }}
               >
                 <Text
@@ -95,36 +87,18 @@ export default function Home({ navigation }) {
             </View>
           </View>
         </View>
-        <View style={{ flexDirection: "row" }}>
-          <View
-            backgroundColor="lightgrey"
-            style={{
-              flexDirection: "row",
-              marginTop: 15,
-              borderRadius: 50,
-              marginLeft: 15,
-              marginRight: 45,
-              justifyContent: "space-around",
-            }}
-          ></View>
-        </View>
 
-        <View style={styles.Titlebar}>
-          <Text style={styles.Texttitle}>Breakfast</Text>
+        <View style={styles.textView}>
+          <Text style={styles.titletext}>Breakfast</Text>
         </View>
-
         <FlatList
           horizontal={true}
           showsHorizontalScrollIndicator={false}
           data={data}
           keyExtractor={(item) => item.id}
           extraData={indexCheck}
-          renderItem={({ item, index }) => (
-            <Pressable
-              onPress={() => {
-                setindexCheck(item.id);
-              }}
-            >
+          renderItem={({ item }) => (
+            <Pressable onPress={() => setindexCheck(item.id)}>
               <View
                 style={
                   indexCheck === item.id
@@ -140,7 +114,6 @@ export default function Home({ navigation }) {
                   style={{
                     top: 0,
                     color: indexCheck === item.id ? color.lYellow : "black",
-                    fontWeight: "bold",
                   }}
                 >
                   {item.name}
@@ -150,100 +123,80 @@ export default function Home({ navigation }) {
           )}
         />
 
-        <View style={styles.Titlebar}>
-          <Text style={styles.Texttitle}>Lunch</Text>
+        <View style={styles.textView}>
+          <Text style={styles.titletext}>Lunch</Text>
         </View>
-        <View>
-          <View style={{ flexDirection: "row" }}>
-            <Text
-              style={{
-                fontWeight: "bold",
-                fontSize: 17,
-                marginTop: 13,
-                marginLeft: 14,
-                marginRight: 10,
-              }}
-            >
-              Option Changing in
-            </Text>
-          </View>
-          <FlatList
-            style={{ marginTop: 10, marginBottom: 10 }}
-            horizontal={true}
-            data={foodCardData}
-            showsHorizontalScrollIndicator={false}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item }) => (
-              <View style={{ marginLeft: 3 }}>
-                <FoodCard
-                  screenWidth={Screen_width * 0.8}
-                  RestName={item.RestName}
-                  faraway={item.faraway}
-                  BussinessAddress={item.BussinessAddress}
-                  image={item.image}
-                  AvrgReview={item.AvrgReview}
-                  NoOfReview={item.NoOfReview}
+        <FlatList
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          data={data}
+          keyExtractor={(item) => item.id}
+          extraData={indexCheck2}
+          renderItem={({ item }) => (
+            <Pressable onPress={() => setindexCheck2(item.id)}>
+              <View
+                style={
+                  indexCheck2 === item.id
+                    ? { ...styles.cardSelected }
+                    : { ...styles.card }
+                }
+              >
+                <Image
+                  style={{ height: 60, width: 60, borderRadius: 30 }}
+                  source={item.image}
                 />
+                <Text
+                  style={{
+                    top: 0,
+                    color: indexCheck2 === item.id ? color.lYellow : "black",
+                  }}
+                >
+                  {item.name}
+                </Text>
               </View>
-            )}
-          />
-        </View>
-        <View style={styles.Titlebar}>
-          <Text style={{ fontSize: 18, fontWeight: "bold" }}>
-            Promotion Avaiable
-          </Text>
-        </View>
-        <View>
-          <FlatList
-            style={{ marginTop: 10, marginBottom: 10 }}
-            horizontal={true}
-            data={foodCardData}
-            showsHorizontalScrollIndicator={true}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item }) => (
-              <View style={{ marginLeft: 3 }}>
-                <FoodCard
-                  screenWidth={Screen_width * 0.8}
-                  RestName={item.RestName}
-                  faraway={item.faraway}
-                  BussinessAddress={item.BussinessAddress}
-                  image={item.image}
-                  AvrgReview={item.AvrgReview}
-                  NoOfReview={item.NoOfReview}
-                />
-              </View>
-            )}
-          />
-        </View>
+            </Pressable>
+          )}
+        />
 
-        <View style={styles.Titlebar}>
-          <Text style={{ fontSize: 18, fontWeight: "bold" }}>
-            Restaurant in your Area
-          </Text>
+        <View style={styles.textView}>
+          <Text style={styles.titletext}>Dinner</Text>
         </View>
-        <View style={{ width: Screen_width, padding: 10 }}>
-          {foodCardData.map((item, index) => (
-            <View key={index}>
-              <FoodCard
-                screenWidth={Screen_width * 0.95}
-                RestName={item.RestName}
-                faraway={item.faraway}
-                BussinessAddress={item.BussinessAddress}
-                image={item.image}
-                AvrgReview={item.AvrgReview}
-                NoOfReview={item.NoOfReview}
-              />
-            </View>
-          ))}
-        </View>
+        <FlatList
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          data={data}
+          keyExtractor={(item) => item.id}
+          extraData={indexCheck3}
+          renderItem={({ item }) => (
+            <Pressable onPress={() => setindexCheck3(item.id)}>
+              <View
+                style={
+                  indexCheck3 === item.id
+                    ? { ...styles.cardSelected }
+                    : { ...styles.card }
+                }
+              >
+                <Image
+                  style={{ height: 60, width: 60, borderRadius: 30 }}
+                  source={item.image}
+                />
+                <Text
+                  style={{
+                    top: 0,
+                    color: indexCheck3 === item.id ? color.lYellow : "black",
+                  }}
+                >
+                  {item.name}
+                </Text>
+              </View>
+            </Pressable>
+          )}
+        />
       </ScrollView>
+
       {Delivery && (
         <View style={styles.FloatingButton}>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate("MapScreen");
-            }}
-          >
+          <TouchableOpacity onPress={() => navigation.navigate("MapScreen")}>
             <Icon name="location" size={30} color="black" />
             <Text>Map</Text>
           </TouchableOpacity>
@@ -258,7 +211,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#f0efeb",
     paddingBottom: 5,
-    // borderRadius: -10,
   },
   btn: {
     borderRadius: 30,
@@ -272,7 +224,6 @@ const styles = StyleSheet.create({
   card: {
     borderRadius: 20,
     backgroundColor: "white",
-    color: "lightgrey",
     justifyContent: "center",
     alignItems: "center",
     padding: 5,
@@ -283,7 +234,6 @@ const styles = StyleSheet.create({
   },
   cardSelected: {
     borderRadius: 20,
-    color: "red",
     backgroundColor: color.dgreen,
     justifyContent: "center",
     alignItems: "center",
@@ -293,30 +243,28 @@ const styles = StyleSheet.create({
     margin: 15,
     marginBottom: 25,
   },
-  Titlebar: {
-    backgroundColor: color.lYellow,
-    borderRadius: 10,
-    padding: 4,
-    marginTop: 0,
-  },
   FloatingButton: {
     position: "absolute",
     bottom: 10,
     right: 13,
-    backgroundColor: "white",
-    elevation: 10,
     width: 60,
     height: 60,
     borderRadius: 30,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: color.lYellow,
-    // textAlign: "center",
+    elevation: 10,
   },
-  Texttitle: {
-    textAlign: "center",
-    fontSize: 20,
+  titletext: {
+    fontSize: 21,
     fontWeight: "bold",
     marginLeft: 10,
+    textAlign: "center",
+  },
+  textView: {
+    backgroundColor: color.lYellow,
+    borderRadius: 13,
+    padding: 4,
+    marginTop: 0,
   },
 });
